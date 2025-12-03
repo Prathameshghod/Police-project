@@ -1,13 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&family=Goldman:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+body{
+  background: black;
+}
+.goldman-regular {
+  font-family: "Goldman", sans-serif;
+  font-weight: 400;
 }
 
-body {
-  background: black;
+.goldman-bold {
+  font-family: "Goldman", sans-serif;
+  font-weight: 700;
+}
+
+.neon-text {
+  font-family: 'Goldman', sans-serif;
+  color: #00f6ff;
+  letter-spacing: 0.1em;
+  font-size: 10rem;
+  text-shadow:
+    5px 5px 15px #00f6ff
+}
+
+.alexandria {
+  font-family: "Alexandria", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
