@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 
+
 export default function Home() {
   return (
     <div className="w-screen h-screen bg-black flex flex-col justify-start items-center pt-24">
@@ -26,7 +27,7 @@ export default function Home() {
                          shadow-2xl shadow-purple-600/100
                          hover:scale-105
                          hover:shadow-cyan-400/30
-                         transition-all duration-300">Scan Now</button> </Link>Link>
+                         transition-all duration-300">Scan Now</button> </Link>
     </div>
   );
 }
