@@ -7,10 +7,11 @@ export default function Login() {
   const [message, setMessage] = useState("");
 
   const handleLogin = async () => {
-    const response = await fetch("ttps://police-project-backend-68ng.vercel.app/api/login", {
+    const response = await fetch("https://police-project-backend-68ng.vercel.app/api/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        action:'login',
         identifier: usernameOrEmail,
         password,
       }),
