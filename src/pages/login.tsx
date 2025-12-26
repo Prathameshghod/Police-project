@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,  useEffect } from "react";
 import "./css/Login.css";
 
 export default function Login() {
@@ -18,7 +18,14 @@ export default function Login() {
     });
 
     const data = await response.json();
-    setMessage(data.message);
+      if (!response.ok || !data.success) {
+        setMessage(data.message || "Login failed");
+        return;
+      }
+   
+      localStorage.setItem("username", JSON.stringify(data.user.username));
+       localStorage.setItem("token", JSON.stringify(data.token));
+     setMessage("✅ Login successful");
   };
 
   return (
