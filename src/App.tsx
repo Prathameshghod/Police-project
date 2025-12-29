@@ -2,6 +2,7 @@ import Home from "./pages/home";
 import Login from "./pages/login";
 import Service from "./pages/service";
 import Telegramscan from "./pages/telegramscan";
+import PanVerification from "./pages/panVerification";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 function App() {
@@ -21,6 +22,10 @@ function App() {
     {
       path: "/service",
       element: <Service />,
+    },
+     {
+      path: "/panVerification",
+      element: <PanVerification/>,
     },
   ]);
 
