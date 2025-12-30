@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./css/scan.css";
 
 export default function Service() {
   const [user, setUser] = useState(null);
@@ -7,13 +8,40 @@ export default function Service() {
   const [number, setNumber] = useState("");
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [credits, setCredits] = useState(0);
 
+
+ 
+ const getCredits = async () => { 
+  try{
+    const username = localStorage.getItem("username");
+    const response = await fetch(
+      "https://police-project-backend-68ng.vercel.app/api/getCredits",
+      {
+        method:"POST",
+        headers : { "Content-Type": "application/json" },
+        body : JSON.stringify({username})
+      }
+    );
+    const result = await response.json();
+    const credits=  result.credit;
+    console.log(credits);
+      // ✅ SAVE TO STATE
+    setCredits(result.credit);
+
+
+
+  }
+  catch(err){
+    setError("server error in fetching credits");
+  }
+}
 
   const scanNumber = async () => {
     if (!number) return alert("Enter a number first!");
     setLoading(true);
 
-   /* try {
+    try {
       const response = await fetch("https://police-project-backend-68ng.vercel.app/api/MobileApiCall", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -28,9 +56,10 @@ export default function Service() {
       alert("Server Error");
     } finally {
       setLoading(false);
-    }*/
+     
+    }
   };
-
+ getCredits();
   const navigate = useNavigate();
 
 
@@ -80,67 +109,67 @@ export default function Service() {
   }, []);
 
   return (
-    <div style={{ width: "100%", textAlign: "center", marginTop: "60px" }}>
-      <h1>TRNETRA OSINT Number Scan</h1>
+   <div className="service-page">
+      {/* Header */}
+      <header className="service-header">
+        <h1 className="logo">
+          TRINETRA <span>OSINT</span>
+        </h1>
 
-      <input
-        type="text"
-        placeholder="Enter phone number"
-        value={number}
-        onChange={(e) => setNumber(e.target.value)}
-        style={{
-          padding: "14px",
-          width: "300px",
-          fontSize: "18px",
-          borderRadius: "8px",
-          marginRight: "10px"
-        }}
-      />
+        <div className="credits-box">
+          <span className="credits-text">Credits</span>
+            <span className="credits-count">{credits}</span>
 
-      <button
-        onClick={scanNumber}
-        style={{
-          padding: "14px 24px",
-          fontSize: "18px",
-          fontWeight: "bold",
-          borderRadius: "8px",
-          cursor: "pointer",
-          background: "#00eaff", 
-          border: "none",
-          color: "black"
-        }}
-      >
-        {loading ? "Scanning..." : "Scan"}
-      </button>
+        </div>
+      </header>
 
-      {result && (
-  <div
-    style={{
-      marginTop: "40px",
-      padding: "20px",
-      width: "80%",
-      marginLeft: "auto",
-      marginRight: "auto",
-      borderRadius: "10px",
-      background: "#111",
-      color: "#00eaff",
-      textAlign: "left",
-      boxShadow: "0 0 15px rgba(0,234,255,0.3)"
-    }}
-  >
-    <h2 style={{ textAlign: "center" }}>Scan Result</h2>
+      {/* Main Card */}
+      <div className="scan-card">
+        <div className="input-row">
+          <div className="input-group">
+            <label>Phone Number: </label>
+            <input
+              type="text"
+              placeholder="Enter Phone Number to scan"
+              value={number}
+              onChange={(e) => setNumber(e.target.value)}
+            />
+          </div>
 
-    {Object.entries(result).map(([key, value]) => (
-      <div key={key} style={{ marginBottom: "12px" }}>
-        <strong>{key}:</strong>{" "}
-        {typeof value === "object"
-          ? JSON.stringify(value, null, 2)
-          : String(value)}
+          <button
+            className="scan-btn"
+            onClick={scanNumber}
+            disabled={loading}
+          >Scan Now
+           
+          </button>
+        </div>
+
+        <div className="result-label">Result :</div>
+
+        <div className="result-box">
+          {result ? (
+            Object.entries(result).map(([key, value]) => (
+              <div key={key} className="result-row">
+                <strong>{key}:</strong>{" "}
+                {typeof value === "object"
+                  ? JSON.stringify(value, null, 2)
+                  : String(value)}
+              </div>
+            ))
+          ) : (
+            <span className="placeholder-text">
+             
+            </span>
+          )}
+        </div>
+
+        <div className="download-row">
+          <button className="download-btn" disabled={!result}>
+            Download PDF
+          </button>
+        </div>
       </div>
-    ))}
-  </div>
-)}
-
     </div>
   );
 }
