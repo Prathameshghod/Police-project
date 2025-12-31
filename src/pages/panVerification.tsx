@@ -2,9 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./css/scan.css";
 
-type User = {
-  username?: string;
-};
 
 export default function Service() {
   const [error, setError] = useState<string>("");
