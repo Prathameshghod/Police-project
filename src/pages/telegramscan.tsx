@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./css/scan.css";
 
 export default function Service() {
-  const [user, setUser] = useState(null);
-  const [error, setError] = useState("");
+  const [ setUser] = useState(null);
+  const [ setError] = useState("");
   const [number, setNumber] = useState("");
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);

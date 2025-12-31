@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
+
 import { useNavigate } from "react-router-dom";
-import "./css/Login.css";
+
 
 export default function Login() {
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
@@ -130,6 +131,7 @@ export default function Login() {
   };
 
   return (
+    <React.Fragment>
     <div className="login-container">
       <canvas ref={canvasRef} className="background-canvas" />
       <h1 className="glitch" data-text="TRINETRA OSINT">TRINETRA OSINT</h1>
@@ -160,5 +162,6 @@ export default function Login() {
         <p className="message goldman-regular">{message}</p>
       </div>
     </div>
+    </React.Fragment>
   );
 }
