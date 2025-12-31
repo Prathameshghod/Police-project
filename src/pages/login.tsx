@@ -8,6 +8,7 @@ export default function Login() {
   const [message, setMessage] = useState("");
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     const canvas = canvasRef.current;
