@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "./css/scan.css";
 
 
+
 export default function Service() {
-  const [error, setError] = useState<string>("");
-const [ setUser] = useState<any>(null);
 
   const [number, setNumber] = useState<string>("");
   const [result, setResult] = useState<Record<string, any> | null>(null);
@@ -32,7 +31,7 @@ const [ setUser] = useState<any>(null);
       const data = await response.json();
       setCredits(data.credit ?? 0);
     } catch {
-      setError("Server error in fetching credits");
+      console.log("Server error in fetching credits");
     }
   };
 
@@ -42,7 +41,7 @@ const [ setUser] = useState<any>(null);
       const token = localStorage.getItem("token");
 
       if (!token) {
-        setError("No token found");
+        alert("No session id found");
         setTimeout(() => navigate("/login"), 4000);
         return;
       }
@@ -60,15 +59,15 @@ const [ setUser] = useState<any>(null);
         const data = await response.json();
 
         if (!data.success) {
-          setError("Unauthorized");
+          alert("server error");
           setTimeout(() => navigate("/login"), 4000);
           return;
         }
 
-        setUser(data.user);
+      
         getCredits(); // ✅ AFTER LOGIN SUCCESS
       } catch {
-        setError("Server error");
+        console.log("Server error");
       }
     };
 
@@ -160,7 +159,7 @@ const [ setUser] = useState<any>(null);
           </button>
         </div>
 
-        {error && <p className="error-text">{error}</p>}
+      
       </div>
     </div>
   );
