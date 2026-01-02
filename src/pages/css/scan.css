@@ -1,5 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap");
+
+:root {
+  --neon-cyan: #00eaff;
+  --neon-green: #00ffdd;
+  --danger-red: #f83131;
+}
 
 * {
   box-sizing: border-box;
@@ -8,11 +14,30 @@
 body {
   margin: 0;
   background: #000;
-  font-family: 'Alexandria', sans-serif;
+  font-family: "Alexandria", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+/* ===== CANVAS LAYER ===== */
+.cyber-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ===== PAGE WRAPPER ===== */
+.service-wrapper {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
 }
 
 /* ===== PAGE ===== */
 .service-page {
+  position: relative;
+  z-index: 1;
   min-height: 100vh;
   padding: 40px 60px;
   background: radial-gradient(circle at center, #0f3d33, #000);
@@ -26,46 +51,41 @@ body {
   align-items: center;
 }
 
+/* ===== LOGO ===== */
 .logo {
-  font-family: 'Goldman', cursive;
-  font-size: 42px;
-   font-family: "Goldman", sans-serif;
+  font-family: "Goldman", sans-serif;
   font-size: 9rem;
   font-weight: 700;
   letter-spacing: 0.1em;
- background: linear-gradient(90deg, #00FFDD 24%, #00EAFF 60%);
+  background: linear-gradient(90deg, var(--neon-green) 24%, var(--neon-cyan) 60%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
-  margin-left: 20vh;
 }
 
 .logo span {
   margin-left: 30px;
 }
 
+/* ===== CREDITS ===== */
 .credits-box {
-  background: linear-gradient(180deg, #f83131, #c96f6f);
+  background: linear-gradient(180deg, var(--danger-red), #c96f6f);
   padding: 6px 16px;
   border-radius: 24px;
-  font-family :'Goldman', cursive;
+  font-family: "Goldman", sans-serif;
   text-align: center;
   font-size: 30px;
-  max-width: 100px;
-    min-width: 190px;
+  min-width: 190px;
   min-height: 70px;
-border: 3px solid #00eaff;
+  border: 3px solid var(--neon-cyan);
   box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
 }
 
 .credits-text {
   display: block;
-  
 }
 
 .credits-count {
- 
   font-weight: bold;
 }
 
@@ -77,10 +97,10 @@ border: 3px solid #00eaff;
   border-radius: 40px;
   padding: 40px;
   box-shadow: 0 0 40px rgba(0, 255, 200, 0.4);
-  border: 3px solid #00eaff;
+  border: 3px solid var(--neon-cyan);
 }
 
-/* ===== INPUT ROW ===== */
+/* ===== INPUT ===== */
 .input-row {
   display: flex;
   gap: 20px;
@@ -92,41 +112,20 @@ border: 3px solid #00eaff;
 }
 
 .input-group label {
-  display: block;
   font-size: 25px;
   margin-bottom: 10px;
 }
 
 .input-group input {
-  width: 40%;
+  width: 100%;
+  max-width: 420px;
   padding: 12px 18px;
   border-radius: 10px;
   border: none;
-  outline: none;
   font-size: 19px;
 }
 
-.input-group.horizontal {
-  width: 70%;
-}
-
-.input-with-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 90%;
-}
-
-
-.input-with-btn input {
-  flex: 1;
-  padding: 10px;
-  font-size: 18px;
-  height: 52px;
-  box-sizing: border-box;
-  border-radius: 10px;
-}
-
+/* ===== BUTTONS ===== */
 .scan-btn {
   height: 52px;
   padding: 0 26px;
@@ -135,18 +134,35 @@ border: 3px solid #00eaff;
   border-radius: 10px;
   background: #1b2a2a;
   color: #fff;
-  border: none;
+  border: 1px solid var(--neon-cyan);
   cursor: pointer;
-  white-space: nowrap;
   box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
- margin-bottom: 21px;
+  margin-bottom: 21px;
+  transition: 0.3s;
 }
-
 
 .scan-btn:hover {
-  background: #233d3d;
+  box-shadow: 0 0 20px var(--neon-cyan);
 }
 
+/* ===== RESULT ===== */
+.result-label {
+  margin-top: 25px;
+  font-size: 30px;
+}
+
+.result-box {
+  margin-top: 12px;
+  height: 300px;
+  padding: 20px;
+  background: rgba(0, 243, 255, 0.06);
+  border-radius: 30px;
+  border: 3px solid #00ffff;
+  color: #00f3ff;
+  overflow-y: auto;
+}
+
+/* ===== DOWNLOAD ===== */
 .download-row {
   display: flex;
   justify-content: center;
@@ -164,20 +180,6 @@ border: 3px solid #00eaff;
   box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
 }
 
-/* ===== RESULT ===== */
-.result-label {
-  margin-top: 25px;
-  font-size: 30px;
-}
-
-.result-box {
-  margin-top: 12px;
-  height: 300px;
-  background: #e5e5e5;
-  border-radius: 30px;
-  border: 3px solid #00ffff;
-}
-
 /* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
   .input-row {
@@ -185,7 +187,7 @@ border: 3px solid #00eaff;
   }
 
   .logo {
-    font-size: 32px;
+    font-size: 4rem;
   }
 
   .scan-card {
@@ -200,9 +202,5 @@ border: 3px solid #00eaff;
 @media (max-width: 500px) {
   .service-page {
     padding: 20px;
-  }
-
-  .credits-box {
-    padding: 8px 16px;
   }
 }
