@@ -364,7 +364,7 @@ body {
 
 /* ===== GLITCH CORE ===== */
 .glitch {
-  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-size: clamp(3.5rem, 8vw, 7rem);
             font-weight: 900;
             position: relative;
             color: #fff;

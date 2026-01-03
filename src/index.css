@@ -1,13 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&family=Goldman:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body{
-  background: black;
+/* ---------------- GLOBAL RESET ---------------- */
+* {
+  box-sizing: border-box;
 }
+
+body {
+  background: black;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+
+  /* Perfect center alignment on all screens */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* ---------------- FONTS ---------------- */
 .goldman-regular {
   font-family: "Goldman", sans-serif;
   font-weight: 400;
@@ -18,21 +34,46 @@ body{
   font-weight: 700;
 }
 
+.alexandria {
+  font-family: "Alexandria", sans-serif;
+  font-weight: 400;
+}
+
+/* ---------------- NEON TEXT ---------------- */
 .neon-text {
   font-family: "Goldman", sans-serif;
-  font-size: 10rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+
+  /* 🔥 Fluid size – same look on all mobiles */
+  font-size: clamp(2.5rem, 8vw, 6rem);
+
+  letter-spacing: clamp(0.08em, 0.5vw, 0.15em);
+  line-height: 1.1;
+
   background: linear-gradient(90deg, #00FFDD 24%, #00EAFF 60%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+
   text-shadow:
-    5px 5px 5px #00f6ff
+    0 0 10px rgba(0, 246, 255, 0.8),
+    0 0 20px rgba(0, 246, 255, 0.6);
+
+  /* Prevent mobile overflow */
+  max-width: 100%;
+  word-wrap: break-word;
 }
 
-.alexandria {
-  font-family: "Alexandria", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
+/* ---------------- MOBILE SAFETY ---------------- */
+@media (max-width: 360px) {
+  .neon-text {
+    font-size: 2.2rem;
+    letter-spacing: 0.06em;
+  }
+}
+
+/* ---------------- TABLET ---------------- */
+@media (min-width: 768px) {
+  .neon-text {
+    font-size: clamp(4rem, 6vw, 7rem);
+  }
 }
