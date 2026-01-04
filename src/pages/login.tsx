@@ -134,7 +134,9 @@ export default function Login() {
       <div className="login-wrapper">
     <div className="login-container">
       <canvas ref={canvasRef} className="background-canvas" />
+      <div className="heading">
       <h1 className="glitch" data-text="TRINETRA OSINT"><span>TRINETRA OSINT</span></h1>
+      </div>
       <div className="login-box">
         <div className="input-group">
           <label className="goldman-regular">Email</label>

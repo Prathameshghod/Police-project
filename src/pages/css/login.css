@@ -48,11 +48,10 @@ body {
 
 /* ===== GLITCH CORE ===== */
 .glitch {
-  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-size: clamp(2.1rem, 7vw, 3rem);
             font-weight: 900;
             position: relative;
             color: #fff;
-            letter-spacing: 12px;
             text-transform: uppercase;
   font-family: 'Goldman', cursive;
 }
@@ -152,6 +151,11 @@ body {
   align-items: center;
   margin-bottom: 25px;
   width: 100%;
+}
+.heading
+{
+  padding:20px 20px 20px;
+
 }
 
 .input-group label {
