@@ -4,14 +4,9 @@
 * {
   box-sizing: border-box;
 }
-:root {
-  --neon-cyan: #00f3ff;
-  --neon-pink: #d567d5;
-}
 
 body {
   margin: 0;
-  background: #000;
   background: #000;
   font-family: 'Alexandria', sans-serif;
 }
@@ -19,14 +14,9 @@ body {
 /* ===== PAGE ===== */
 .service-page {
   min-height: 100vh;
-  padding: 30px 40px;
-  
-  background: #090000;
-  position: relative;
+  padding: 40px 60px;
+  background: radial-gradient(circle at center, #0f3d33, #000);
   color: #fff;
-  position: relative;
-  z-index: 10;
- 
 }
 
 /* ===== HEADER ===== */
@@ -34,23 +24,21 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 40px;
-  flex-wrap: wrap;
-  gap: 20px;
 }
 
 .logo {
-  font-family: "Goldman", sans-serif;
-  font-size: clamp(2rem, 5vw, 4rem);
+  font-family: 'Goldman', cursive;
+  font-size: 42px;
+   font-family: "Goldman", sans-serif;
+  font-size: 9rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  background: linear-gradient(90deg, #00FFDD 24%, #00EAFF 60%);
+ background: linear-gradient(90deg, #00FFDD 24%, #00EAFF 60%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
-  margin: 0;
-  flex-shrink: 0;
+  margin-left: 20vh;
 }
 
 .logo span {
@@ -59,33 +47,26 @@ body {
 
 .credits-box {
   background: linear-gradient(180deg, #f83131, #c96f6f);
-  padding: 8px 20px;
-  border-radius: 8px;
-  font-family: 'Goldman', cursive;
+  padding: 6px 16px;
+  border-radius: 24px;
+  font-family :'Goldman', cursive;
   text-align: center;
-  min-width: 120px;
-  min-height: 60px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border: 2px solid #00eaff;
+  font-size: 30px;
+  max-width: 100px;
+    min-width: 190px;
+  min-height: 70px;
+border: 3px solid #00eaff;
   box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
 }
 
-
-
-
 .credits-text {
   display: block;
-  font-size: 14px;
-  margin-bottom: 4px;
-  color: #fff;
+  
 }
 
 .credits-count {
-  font-size: 24px;
+ 
   font-weight: bold;
-  color: #fff;
 }
 
 /* ===== CARD ===== */
@@ -94,8 +75,6 @@ body {
   max-width: 1700px;
   background: linear-gradient(180deg, #1c6f5c, #0a2e25);
   border-radius: 40px;
-  position: relative;
-  z-index: 10;
   padding: 40px;
   box-shadow: 0 0 40px rgba(0, 255, 200, 0.4);
   border: 3px solid #00eaff;
@@ -199,126 +178,14 @@ body {
   border: 3px solid #00ffff;
 }
 
-/* ===== SERVICE CARDS GRID ===== */
-.service-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 25px;
-  max-width: 1800px;
-  margin: 0 auto;
-}
-
-.service-card {
-  background: rgba(0, 0, 0, 0.7);
-  border: 3px solid #00ff00;
-  border-radius: 20px;
-  padding: 25px;
-  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.service-card:hover {
-  box-shadow: 0 0 30px rgba(0, 255, 0, 0.6);
-  transform: translateY(-5px);
-}
-
-.service-card-image {
-  width: 100%;
-  height: 150px;
-  object-fit: contain;
-  margin-bottom: 15px;
-  filter: drop-shadow(0 0 10px rgba(0, 255, 0, 0.5));
-}
-
-.service-card-title {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: #fff;
-  text-align: center;
-  font-family: 'Goldman', cursive;
-}
-
-.service-card-input-label {
-  width: 100%;
-  margin-bottom: 10px;
-  font-size: 14px;
-  color: #ccc;
-  font-family: 'Alexandria', sans-serif;
-}
-
-.service-card-input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 2px solid #00eaff;
-  background: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  font-size: 14px;
-  margin-bottom: 15px;
-  outline: none;
-}
-
-.service-card-input:focus {
-  border-color: #00ff00;
-  box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
-}
-
-.service-card-button {
-  width: 100%;
-  padding: 12px;
-  border-radius: 8px;
-  border: 2px solid #00ff00;
-  background: rgba(0, 255, 0, 0.1);
-  color: #00ff00;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  font-family: 'Goldman', cursive;
-  transition: all 0.3s ease;
-}
-
-.service-card-button:hover {
-  background: rgba(0, 255, 0, 0.2);
-  box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
-}
-
-.scan-cost {
-  align-self: flex-start;
-  margin-bottom: 10px;
-  font-size: 14px;
-  color: #00ff00;
-  font-family: 'Goldman', cursive;
-}
-
 /* ===== RESPONSIVE ===== */
-@media (max-width: 1600px) {
-  .service-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media (max-width: 1200px) {
-  .service-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
 @media (max-width: 900px) {
   .input-row {
     flex-direction: column;
   }
 
   .logo {
-    font-size: 2.5rem;
-  }
-
-  .service-grid {
-    grid-template-columns: repeat(2, 1fr);
+    font-size: 32px;
   }
 
   .scan-card {
@@ -330,267 +197,12 @@ body {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   .service-page {
     padding: 20px;
   }
 
-  .service-grid {
-    grid-template-columns: 1fr;
-  }
-
   .credits-box {
-    padding: 6px 16px;
-    min-width: 100px;
-  }
-
-  .service-header {
-    flex-direction: column;
-    align-items: flex-start;
+    padding: 8px 16px;
   }
 }
-
-  .background-canvas {
-    position: fixed;     /* ✅ FIXED, not absolute */
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 0;
-    pointer-events: none;
-  }
-  
-
-
-/* ===== GLITCH CORE ===== */
-.glitch {
-  font-size: clamp(3.5rem, 8vw, 7rem);
-            font-weight: 900;
-            position: relative;
-            color: #fff;
-            letter-spacing: 12px;
-            text-transform: uppercase;
-  font-family: 'Goldman', cursive;
-}
-
-/* ===== FRONT TEXT (REAL GLYPHS) ===== */
-.glitch span {
-  position: relative;
-  z-index: 3;
-  font-weight: 700;
-
-  background: linear-gradient(90deg, #00FFDD 25%, #00EAFF 65%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-
-  filter:
-    drop-shadow(0 0 6px rgba(0,255,255,0.4))
-    drop-shadow(0 0 14px rgba(0,255,255,0.25));
-}
-
-/* ===== GLITCH LAYERS ===== */
-.glitch::before,
-.glitch::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  color: white;   /* 👈 REQUIRED */
-  font-weight: 900;
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* PINK SLICE */
-.glitch::before {
-
-   
-  
-  
-  left: 1px;
-  text-shadow:
-  -2px 0 var(--neon-pink),
-  -4px 0 var(--neon-pink),
-  -6px 0 var(--neon-pink); /* 👈 thickness */
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-anim 4s infinite linear alternate-reverse;
-}
-
-/* CYAN SLICE */
-.glitch::after {
-  left: -0px;
-            text-shadow: -2px 0 var(--neon-cyan);
-            clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-anim2 2s infinite linear alternate-reverse;
-}
-
-/* ===== ANIMATIONS (MATCHING YOUR DEMO) ===== */
-@keyframes glitch-anim {
-  0%   { clip: rect(10px, 9999px, 25px, 0); }
-  20%  { clip: rect(40px, 9999px, 60px, 0); }
-  40%  { clip: rect(20px, 9999px, 35px, 0); }
-  60%  { clip: rect(55px, 9999px, 80px, 0); }
-  80%  { clip: rect(30px, 9999px, 45px, 0); }
-  100% { clip: rect(15px, 9999px, 30px, 0); }
-}
-
-@keyframes glitch-anim2 {
-  0%   { clip: rect(70px, 9999px, 90px, 0); }
-  25%  { clip: rect(20px, 9999px, 40px, 0); }
-  50%  { clip: rect(45px, 9999px, 65px, 0); }
-  75%  { clip: rect(10px, 9999px, 25px, 0); }
-  100% { clip: rect(60px, 9999px, 80px, 0); }
-}
-@keyframes glitch-anim { 0% { clip: rect(10px, 9999px, 20px, 0); } 100% { clip: rect(40px, 9999px, 50px, 0); } }
-        @keyframes glitch-anim2 { 0% { clip: rect(70px, 9999px, 80px, 0); } 100% { clip: rect(10px, 9999px, 30px, 0); } }
-
-
- /* ================================
-   MOBILE LEVELING FIX (GLOBAL)
-================================ */
-
-/* Prevent horizontal scroll on mobile */
-html, body {
-  overflow-x: hidden;
-}
-
-/* Page padding balance */
-@media (max-width: 768px) {
-  .service-page {
-    padding: 16px;
-  }
-}
-
-/* ================================
-   HEADER LEVELING
-================================ */
-@media (max-width: 768px) {
-  .service-header {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 14px;
-  }
-
-  .logo {
-    font-size: clamp(1.8rem, 7vw, 2.6rem);
-    letter-spacing: 0.08em;
-  }
-
-  .logo span {
-    margin-left: 0;
-  }
-
-  .credits-box {
-    width: 100%;
-    max-width: 220px;
-  }
-}
-
-/* ================================
-   CARD LEVELING
-================================ */
-@media (max-width: 768px) {
-  .scan-card {
-    margin-top: 20px;
-    padding: 20px;
-    border-radius: 22px;
-  }
-}
-
-/* ================================
-   INPUT ALIGNMENT (IMPORTANT)
-================================ */
-@media (max-width: 768px) {
-  .input-row {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 14px;
-  }
-
-  .input-group input {
-    width: 100%; /* ❗ FIX uneven widths */
-    font-size: 16px;
-  }
-
-  .input-with-btn {
-    width: 100%;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .scan-btn {
-    width: 100%;
-    margin-bottom: 0;
-  }
-}
-
-/* ================================
-   SERVICE GRID LEVELING
-================================ */
-@media (max-width: 768px) {
-  .service-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .service-card {
-    padding: 18px;
-    border-radius: 18px;
-  }
-
-  .service-card-image {
-    height: 120px;
-  }
-}
-
-/* ================================
-   TEXT SCALE FIX
-================================ */
-@media (max-width: 768px) {
-  .result-label {
-    font-size: 22px;
-  }
-
-  .service-card-title {
-    font-size: 16px;
-  }
-
-  .scan-cost {
-    font-size: 13px;
-  }
-}
-
-/* ================================
-   BUTTON TOUCH FRIENDLY
-================================ */
-@media (max-width: 768px) {
-  .download-btn,
-  .service-card-button {
-    font-size: 16px;
-    padding: 14px;
-    border-radius: 12px;
-  }
-}
-
-/* ================================
-   VERY SMALL PHONES (≤360px)
-================================ */
-@media (max-width: 360px) {
-  .logo {
-    font-size: 1.6rem;
-  }
-
-  .scan-card {
-    padding: 16px;
-  }
-
-  .credits-box {
-    min-width: unset;
-    width: 100%;
-  }
-}
-       
