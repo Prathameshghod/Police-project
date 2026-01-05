@@ -149,27 +149,35 @@ export default function Login() {
       px-4 sm:px-6
     ">
 
-      {/* Heading */}
-      <div className="w-full flex justify-center px-4 mb-6">
+<div className="w-full flex justify-center px-4 mb-6">
   <h1
     className="
       text-center
       font-['Goldman']
-      font-extrabold
-      tracking-[0.25em]
+      /* Massive Thickness */
+      font-black
+      uppercase
+      italic
       
-      /* 🔥 MOBILE FIRST */
-      text-[clamp(2.6rem,10vw,3.7rem)]
+      /* Spacing: Using negative to make letters feel 'thicker' */
+      tracking-[-0.04em]
+      md:tracking-[-0.02em]
       
-      /* DESKTOP */
-      sm:text-[clamp(6.9rem,6vw,3.8rem)]
+      /* 🔥 RESPONSIVE SIZING */
+      /* Mobile: Large enough to break or fit depending on screen */
+      text-[clamp(3.2rem,12vw,4rem)]
       
+      /* Desktop: Massive display size */
+      md:text-[clamp(5rem,8vw,8rem)]
+      
+      /* STYLING: Gradient & Glow */
       text-transparent
       bg-clip-text
       bg-gradient-to-r from-cyan-300 via-cyan-400 to-cyan-300
-      drop-shadow-[0_0_8px_rgba(0,255,255,0.5)]
-      drop-shadow-[0_0_18px_rgba(0,255,255,0.3)]
+      drop-shadow-[0_0_12px_rgba(0,255,255,0.6)]
+      drop-shadow-[0_0_25px_rgba(0,255,255,0.4)]
       select-none
+      leading-none
     "
   >
     TRINETRA OSINT

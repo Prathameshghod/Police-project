@@ -11,20 +11,39 @@ export default function Home() {
     ">
 
       {/* LOGO */}
-      <h1
-        className="
-          goldman-bold neon-text
-          text-[clamp(1.8rem,7vw,5.5rem)]
-          tracking-[0.2em]
-          sm:tracking-[0.35em]
-          text-center
-          max-w-full
-          leading-none
-          break-words
-        "
-      >
-        TRINETRA OSINT
-      </h1>
+    {/* LOGO - Increased Size */}
+<h1
+  className="
+    /* Thickness & Font Style */
+    font-black uppercase italic
+    font-['Goldman']
+    
+    /* 🔥 ENHANCED RESPONSIVE SIZING */
+    /* Mobile: increased from 1.8rem to 2.5rem */
+    /* Desktop: increased max from 5.5rem to 7.5rem */
+    text-[clamp(2.5rem,10vw,7.5rem)]
+    
+    /* Spacing: Tight tracking for that heavy look */
+    tracking-[-0.04em]
+    sm:tracking-[-0.02em]
+    
+    /* Alignment & Layout */
+    text-center
+    max-w-full
+    leading-[0.9] /* Tighter leading to keep the block feel */
+    break-words
+    select-none
+
+    /* Gradient & Neon Glow Styling */
+    text-transparent
+    bg-clip-text
+    bg-gradient-to-r from-cyan-300 via-cyan-400 to-cyan-300
+    drop-shadow-[0_0_15px_rgba(0,255,255,0.7)]
+    drop-shadow-[0_0_30px_rgba(0,255,255,0.4)]
+  "
+>
+  TRINETRA OSINT
+</h1>
 
       {/* TAGLINE */}
       <p
