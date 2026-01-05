@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import "../pages/css/scan.css";
 import mobileScan from "../assets/mobile scan.png";
 import addharScan from "../assets/addhar scan.png";
@@ -12,6 +12,7 @@ interface ServiceCard {
   id: string;
   title: string;
   inputLabel: string;
+  link: string;
   image: string;
   scanCost?: number;
 }
@@ -19,7 +20,7 @@ interface ServiceCard {
 function Service() {
   const [user, setUser] = useState<any>(null);
   const [error, setError] = useState("");
-  const [credits, setCredits] = useState(100);
+  const [credits, setCredits] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
@@ -30,6 +31,7 @@ function Service() {
       inputLabel: "Input : Phone No.",
       image: mobileScan,
       scanCost: 50,
+      link:"/telegramscan",
     },
     {
       id: "aadhaar-to-info",
@@ -37,54 +39,63 @@ function Service() {
       inputLabel: "Input : Addhar No.",
       image: addharScan,
       scanCost: 10,
+      link:"/AddharInfo"
     },
     {
       id: "pan-to-info",
       title: "PAN to info",
       inputLabel: "Input : PAN No.",
       image: panInfo,
+      link:"/panVerification"
     },
     {
       id: "mobile-to-pan",
       title: "Mobile to PAN",
       inputLabel: "Input : Mobile No.",
       image: panInfo,
+      link:"/MobileToPan"
     },
     {
       id: "pan-to-gst",
       title: "PAN to GST Info",
       inputLabel: "Input : PAN No.",
       image: panToGST,
+      link:"/PantoGst"
     },
     {
       id: "director-intelligence",
       title: "Director Intelligence",
       inputLabel: "Input : DIN No.",
       image: directorSearch,
+      link:"/DirectorIntelegence"
     },
     {
       id: "pan-to-uan",
       title: "PAN to UAN Info",
       inputLabel: "Input : PAN No.",
       image: panToUpi,
+      link:"/PanToUan"
     },
     {
       id: "experian-credit",
       title: "Experian Credit PDF",
       inputLabel: "Input : Report Info",
       image: panInfo,
+      link:"/ExperianCredit"
     },
     {
       id: "vehicle-to-owner",
       title: "Vehicle to Owner",
       inputLabel: "Input : Vehicle No.",
       image: panInfo,
+      link:"/VehicleOwner"
     },
     {
       id: "premium-breach",
       title: "Premium Breach Lookup",
       inputLabel: "Input : Mobile No.",
       image: panInfo,
+      link:"/Premiumlookup"
     },
   ];
 
@@ -100,6 +111,26 @@ function Service() {
         return;
       }
 
+      const getCredits = async () => {
+        try {
+          const username = localStorage.getItem("username");
+    
+          const response = await fetch(
+            "https://police-project-backend-68ng.vercel.app/api/getCredits",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ username }),
+            }
+          );
+    
+          const data = await response.json();
+          setCredits(data.credit);
+        } catch (err) {
+          console.error("Error fetching credits");
+        }
+      };
+
       try {
         const response = await fetch(
           "https://police-project-backend-68ng.vercel.app/api/verify",
@@ -114,6 +145,7 @@ function Service() {
 
         const data = await response.json();
         console.log(data);
+        getCredits();
 
         if (!data.success) {
           if (!token) {
@@ -143,11 +175,7 @@ function Service() {
     verifyUser();
   }, [navigate]);
 
-  const handleScan = (serviceId: string) => {
-    // Handle scan action here
-    console.log(`Scanning ${serviceId}`);
-    // You can navigate to specific scan pages or make API calls here
-  };
+ 
 
   const filteredServices = services.filter((service) =>
     service.title.toLowerCase().includes(searchQuery.toLowerCase())
@@ -227,12 +255,13 @@ function Service() {
             />
             <h3 className="service-card-title">{service.title}</h3>
             <div className="service-card-input-label">{service.inputLabel}</div>
+            <Link to={service.link}>
             <button
-              onClick={() => handleScan(service.id)}
+             
               className="service-card-button"
             >
               Scan Now
-            </button>
+            </button></Link>
           </div>
         ))}
       </div>
