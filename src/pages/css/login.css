@@ -1,227 +1,35 @@
-@import url('https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap');
-
-:root {
-  --neon-cyan: #00f3ff;
-  --neon-pink: #d567d5;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  background: #000;
-  /* Fixed for mobile Chrome address bar issues */
-  min-height: 100vh;
-  min-height: -webkit-fill-available; 
-  overflow-x: hidden;
-  width: 100%;
-}
-
-.login-wrapper {
+.glitch {
   position: relative;
-  width: 100%;
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-  overflow-x: hidden;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
-.background-canvas {
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
   position: absolute;
   inset: 0;
-  z-index: 0;
+  pointer-events: none;
 }
 
-.login-container {
-  width: 100%;
-  min-height: 100vh;
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 15px; /* Reduced padding for more room on small screens */
+.glitch::before {
+  left: 1px;
+  text-shadow: -2px 0 #d567d5, -4px 0 #d567d5;
+  animation: glitch-anim 4s infinite linear alternate-reverse;
 }
 
-/* --- GLITCH HEADING --- */
-.glitch {
-  font-size: clamp(1.8rem, 8vw, 3rem); /* Adjusted for better small-screen fit */
-  font-weight: 900;
-  position: relative;
-  color: #fff;
-  text-transform: uppercase;
-  font-family: 'Goldman', cursive;
-  text-align: center;
-  margin-bottom: 20px;
-  width: 100%;
+.glitch::after {
+  left: -1px;
+  text-shadow: -2px 0 #00f3ff;
+  animation: glitch-anim2 2s infinite linear alternate-reverse;
 }
 
-.glitch span {
-  position: relative;
-  z-index: 3;
-  background: linear-gradient(90deg, #00FFDD 25%, #00EAFF 65%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  filter: drop-shadow(0 0 6px rgba(0,255,255,0.4));
+@keyframes glitch-anim {
+  0% { clip: rect(10px, 9999px, 25px, 0); }
+  100% { clip: rect(40px, 9999px, 50px, 0); }
 }
 
-/* --- BOX & INPUTS --- */
-.login-box {
-  width: 100%;
-  max-width: 600px; /* Reduced from 1000px for better desktop/mobile balance */
-  background: rgba(2, 11, 15, 0.9);
-  border: 3px solid var(--neon-cyan); /* Slightly thinner border for mobile scale */
-  border-radius: 20px;
-  padding: 30px 20px;
-  box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
-  display: flex;
-  flex-direction: column;
-  backdrop-filter: blur(10px);
-}
-
-.input-group {
-  display: flex;
-  flex-direction: column; /* Stacked by default for mobile-first approach */
-  margin-bottom: 20px;
-  width: 100%;
-}
-
-.input-group label {
-  color: white;
-  font-family: "Goldman", sans-serif;
-  font-size: 18px;
-  margin-bottom: 8px;
-  letter-spacing: 1px;
-}
-
-.input-group input {
-  width: 100%;
-  padding: 14px;
-  font-size: 16px; /* 16px prevents iOS Safari/Chrome from zooming in on focus */
-  border-radius: 8px;
-  border: 2px solid transparent;
-  background: #e2e8f0;
-  color: #000;
-  outline: none;
-  transition: 0.3s;
-  -webkit-appearance: none; /* Removes default inner shadows on iOS Chrome */
-}
-
-/* --- HEADING DECORATION --- */
-.heading {
-  
-  padding: 4px 12px;
-  width: fit-content; /* Changed from 90% to avoid overflow */
-  max-width: 90%;
-  margin: 0 auto 20px auto;
-  letter-spacing: 1px; /* Changed from -5px which breaks readability on mobile */
-  font-family: 'Goldman', sans-serif;
-  color: white;
-  text-align: center;
-}
-
-.login-btn {
-  width: 100%;
-  padding: 16px;
-  font-size: 20px;
-  font-family: 'Goldman', cursive;
-  font-weight: bold;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  background: linear-gradient(to right, #00eaff, #008b8b);
-  transition: 0.3s;
-  margin-top: 10px;
-  touch-action: manipulation; /* Optimizes for touch taps */
-}
-
-/* --- UPDATED HEADING (FIXES OVERFLOW) --- */
-.heading {
-  background: #d21033;
-  padding: 10px;
-  width: 100%; /* Changed from 90% to prevent side gaps/overflow */
-  max-width: 100%;
-  box-sizing: border-box;
-  /* Removed negative letter-spacing which caused text to spill out */
-  letter-spacing: normal; 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-/* --- OPTIMIZED LOGIN BOX --- */
-.login-box {
-  width: 95%; /* Use percentage for mobile responsiveness */
-  max-width: 500px;
-  background: rgba(2, 11, 15, 0.9);
-  border: 2px solid var(--neon-cyan);
-  border-radius: 20px;
-  padding: 20px; /* Reduced padding to save vertical space */
-  box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
-  display: flex;
-  flex-direction: column;
-  backdrop-filter: blur(10px);
-  /* Ensures box fits within the mobile viewport height */
-  max-height: 85vh; 
-  overflow-y: auto; 
-}
-
-/* --- TIGHTER INPUT GROUPS --- */
-.input-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px; /* Tighter spacing */
-  width: 100%;
-}
-
-.input-group label {
-  color: white;
-  font-family: "Goldman", sans-serif;
-  /* Smaller font for mobile to keep it on one line */
-  font-size: clamp(16px, 5vw, 24px); 
-  margin-bottom: 5px;
-  text-align: center;
-}
-
-.input-group input {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px; /* Prevents auto-zoom on Chrome mobile */
-  border-radius: 6px;
-  border: none;
-  background: #e2e8f0;
-  color: #000;
-}
-
-/* --- BUTTON SCALE --- */
-.login-btn {
-  width: 100%;
-  padding: 14px;
-  font-size: 18px;
-  margin-top: 10px;
-  /* ... keep your existing gradient ... */
-}
-/* --- DESKTOP ADJUSTMENTS --- */
-@media (min-width: 769px) {
-  .input-group {
-    flex-direction: row;
-    align-items: center;
-  }
-  
-  .input-group label {
-    flex: 0 0 180px;
-    margin-bottom: 0;
-  }
-  
-  .login-btn {
-    max-width: 300px;
-  }
+@keyframes glitch-anim2 {
+  0% { clip: rect(70px, 9999px, 80px, 0); }
+  100% { clip: rect(10px, 9999px, 30px, 0); }
 }

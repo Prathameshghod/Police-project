@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import "./css/login.css";
+
 
 export default function Login() {
   const [usernameOrEmail, setUsernameOrEmail] = useState("");
@@ -131,40 +131,169 @@ export default function Login() {
 
   return (
     <React.Fragment>
-      <div className="login-wrapper">
-    <div className="login-container">
-      <canvas ref={canvasRef} className="background-canvas" />
-      <div className="heading">
-         <h1 className="glitch" data-text="TRINETRA OSINT"><span>TRINETRA OSINT</span></h1>
-      </div>
-      <div className="login-box">
-        <div className="input-group">
-          <label className="goldman-regular">Email</label>
+    
+  <div className="relative w-screen h-screen overflow-hidden bg-black">
+    
+    {/* Canvas */}
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 z-0"
+    />
+
+    {/* Content */}
+    <div className="
+      relative z-10
+      min-h-screen
+      flex flex-col
+      items-center justify-center
+      px-4 sm:px-6
+    ">
+
+      {/* Heading */}
+      <div className="w-full flex justify-center px-4 mb-6">
+  <h1
+    className="
+      text-center
+      font-['Goldman']
+      font-extrabold
+      tracking-[0.25em]
+      
+      /* 🔥 MOBILE FIRST */
+      text-[clamp(2.6rem,10vw,3.7rem)]
+      
+      /* DESKTOP */
+      sm:text-[clamp(6.9rem,6vw,3.8rem)]
+      
+      text-transparent
+      bg-clip-text
+      bg-gradient-to-r from-cyan-300 via-cyan-400 to-cyan-300
+      drop-shadow-[0_0_8px_rgba(0,255,255,0.5)]
+      drop-shadow-[0_0_18px_rgba(0,255,255,0.3)]
+      select-none
+    "
+  >
+    TRINETRA OSINT
+  </h1>
+</div>
+
+
+      {/* Login Box */}
+      <div className="
+        w-full max-w-[1000px]
+        bg-[rgba(2,11,15,0.9)]
+        border-4 border-cyan-300
+        rounded-[30px]
+        p-5 sm:p-10
+        shadow-[0_0_30px_rgba(0,243,255,0.3)]
+        backdrop-blur-md
+        flex flex-col
+      ">
+
+        {/* Email */}
+        <div className="
+          flex flex-col sm:flex-row
+          gap-2 sm:gap-6
+          items-start sm:items-center
+          mb-6
+        ">
+          <label className="
+            text-white
+            font-['Goldman']
+            text-lg sm:text-2xl
+            sm:w-[250px]
+          ">
+            Email
+          </label>
+
           <input
             type="text"
             placeholder="Enter your email"
             autoComplete="off"
             onChange={(e) => setUsernameOrEmail(e.target.value)}
+            className="
+              w-full
+              px-4 py-3
+              text-lg
+              rounded-lg
+              bg-slate-200 text-black
+              outline-none
+              border-2 border-transparent
+              focus:border-cyan-300
+              focus:shadow-[0_0_10px_#00f3ff]
+              transition
+            "
           />
         </div>
-        <div className="input-group">
-          <label className="goldman-regular">Password</label>
+
+        {/* Password */}
+        <div className="
+          flex flex-col sm:flex-row
+          gap-2 sm:gap-6
+          items-start sm:items-center
+          mb-6
+        ">
+          <label className="
+            text-white
+            font-['Goldman']
+            text-lg sm:text-2xl
+            sm:w-[250px]
+          ">
+            Password
+          </label>
+
           <input
             type="password"
-            placeholder="Enter your Password"
+            placeholder="Enter your password"
             onChange={(e) => setPassword(e.target.value)}
+            className="
+              w-full
+              px-4 py-3
+              text-lg
+              rounded-lg
+              bg-slate-200 text-black
+              outline-none
+              border-2 border-transparent
+              focus:border-cyan-300
+              focus:shadow-[0_0_10px_#00f3ff]
+              transition
+            "
           />
         </div>
-        <button onClick={handleLogin} className="login-btn goldman-bold">
+
+        {/* Button */}
+        <button
+          onClick={handleLogin}
+          className="
+            w-full sm:max-w-[300px]
+            mx-auto mt-4
+            py-4
+            text-xl
+            font-bold
+            font-['Goldman']
+            text-white
+            rounded-lg
+            bg-gradient-to-r from-cyan-400 to-teal-600
+            hover:shadow-[0_0_20px_#00f3ff]
+            hover:scale-[1.02]
+            transition
+          "
+        >
           Login In
         </button>
-        <p className="note alexandria">
+
+        {/* Notes */}
+        <p className="mt-4 text-center text-slate-300 font-['Alexandria']">
           Need access? Contact your administrator to create an account.
         </p>
-        <p className="message goldman-regular">{message}</p>
+
+        <p className="mt-2 text-center text-cyan-300 font-['Goldman']">
+          {message}
+        </p>
       </div>
     </div>
-    </div>
+  </div>
+)
+
     </React.Fragment>
   );
 }
