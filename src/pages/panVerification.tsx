@@ -227,7 +227,7 @@ export default function Service() {
         <div className="p-4 md:p-8 flex flex-col gap-4">
           <div className="flex flex-row items-center gap-3">
             <label className="text-white text-sm md:text-xl font-bold uppercase whitespace-nowrap">
-              Phone:
+              PAN:
             </label>
             <input
               type="text"
