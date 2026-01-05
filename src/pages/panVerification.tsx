@@ -1,6 +1,6 @@
 import { useEffect, useState , useRef} from "react";
 import { useNavigate } from "react-router-dom";
-import "./css/scan.css";
+
 
 export default function Service() {
   const [number, setNumber] = useState("");
@@ -196,58 +196,96 @@ export default function Service() {
   };
 
   return (
+    <div className="service-page relative min-h-screen w-full bg-[#0a1919] flex flex-col items-center overflow-hidden font-sans">
+    {/* Background Canvas */}
+    <canvas ref={canvasRef} className="absolute inset-0 z-0 pointer-events-none w-full h-full" />
   
-    <div className="service-page">
-       <canvas ref={canvasRef} className="background-canvas" />
-      <header className="service-header">
-        <h1 className="glitch" data-text="TRINETRA OSINT">
-          <span>  TRINETRA OSINT</span>
+    {/* MAIN CONTAINER */}
+    <div className="relative z-10 flex flex-col w-full max-w-[1200px] h-screen p-4 md:p-10">
+      
+      {/* HEADER: Dynamic based on screen size */}
+      <header className="flex justify-between items-center w-full mb-6">
+        {/* Desktop Heading: One line, wide spacing, only shows on md+ screens */}
+        <h1 className="hidden md:block text-5xl font-black tracking-[0.5em] text-cyan-400 uppercase border-b-4 border-cyan-500 pb-2">
+          TRINETRA OSINT
         </h1>
-
-        <div className="credits-box">
-          <span className="credits-text">Credits</span>
-          <span className="credits-count">{credits}</span>
+  
+        {/* Mobile Heading: Two lines, only shows on small screens */}
+        <h1 className="block md:hidden text-3xl font-black tracking-[0.15em] text-cyan-400 leading-tight uppercase">
+          TRINETRA<br/>
+          <span className="tracking-[0.2em] text-3xl">OSINT</span>
+        </h1>
+  
+        {/* Credits Box: Matches Desktop-5 style on big screens */}
+        <div className="ml-7 bg-gradient-to-r from-red-500 to-red-800 border-2 border-cyan-400 px-6 py-2 rounded-lg md:rounded-1xl shadow-[0_0_15px_rgba(0,255,255,0.4)] flex flex-col items-center min-w-[100px]">
+          <span className="text-sm md:text-base font-bold text-white uppercase">Credits</span>
+          <span className="text-xl md:text-2xl font-black text-white">{credits}</span>
         </div>
       </header>
-
-      <div className="scan-card">
-        <div className="input-row">
-          <div className="input-group">
-            <label>Phone Number:</label>
+  
+      {/* MAIN SCAN CARD: Center-aligned on desktop, full-width on mobile */}
+      <div className="flex-1 flex flex-col bg-gradient-to-b from-[#114d4d] to-[#0a1919] border-[3px] border-cyan-400 rounded-[40px] overflow-hidden shadow-[0_0_30px_rgba(0,255,255,0.2)] mx-auto w-full max-w-5xl">
+        
+        {/* INPUT SECTION: Responsive Padding */}
+        <div className="p-6 md:p-12 flex flex-col md:flex-row md:items-end gap-6">
+          <div className="flex-1 flex flex-col gap-3">
+            <label className="text-white text-lg md:text-2xl font-bold uppercase tracking-widest">
+              Phone Number
+            </label>
             <input
               type="text"
               placeholder="Enter Phone Number to scan"
+              className="w-full h-12 md:h-14 px-4 rounded-xl bg-gray-300 text-black text-lg outline-none border-none shadow-inner"
               value={number}
               onChange={(e) => setNumber(e.target.value)}
             />
           </div>
-
-          <button className="scan-btn" onClick={scanNumber} disabled={loading}>
-            {loading ? "Scanning..." : "Scan Now"}
+  
+          <button 
+            className="h-12 md:h-14 px-10 bg-[#222] text-white border-2 border-gray-600 rounded-full md:rounded-2xl font-black text-lg md:text-xl uppercase hover:bg-black transition-all shadow-lg active:scale-95"
+            onClick={scanNumber} 
+            disabled={loading}
+          >
+            {loading ? "..." : "Scan Now"}
           </button>
         </div>
-
-        <div className="result-label">Result :</div>
-
-        <div className="result-box">
-          {result &&
-            Object.entries(result).map(([key, value]) => (
-              <div key={key} className="result-row">
-                <strong>{key}:</strong>{" "}
-                {typeof value === "object"
-                  ? JSON.stringify(value, null, 2)
-                  : String(value)}
+  
+        {/* RESULT SECTION: Maximized Area */}
+        <div className="flex-1 flex flex-col px-6 md:px-12 pb-6 min-h-0">
+          <h2 className="text-white text-xl md:text-2xl font-bold uppercase mb-4">
+            Result :
+          </h2>
+          
+          {/* Result Box: Massive space for OSINT data */}
+          <div className="flex-1 w-full bg-gray-300 rounded-[30px] p-6 overflow-y-auto text-black font-mono text-sm md:text-base border-4 border-cyan-400/50 shadow-2xl">
+            {result ? (
+              Object.entries(result).map(([key, value]) => (
+                <div key={key} className="mb-3 border-b border-black/10 pb-2">
+                  <span className="font-bold text-teal-900 uppercase text-xs">{key}</span>
+                  <div className="pl-2 break-words leading-relaxed">
+                    {typeof value === "object" ? JSON.stringify(value, null, 2) : String(value)}
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="h-full flex items-center justify-center text-gray-500 italic uppercase tracking-[0.5em] text-center">
+                Awaiting System Input...
               </div>
-            ))}
+            )}
+          </div>
         </div>
-
-        <div className="download-row">
-          <button className="download-btn" disabled={!result}>
-            Download PDF
+  
+        {/* FOOTER BUTTON: Download PDF aligned right for Desktop-5 style */}
+        <div className="p-6 md:p-8 flex justify-end">
+          <button 
+            className="w-full md:w-auto md:px-12 bg-red-600 hover:bg-red-500 text-black py-3 rounded-full font-black text-lg uppercase shadow-[0_0_20px_rgba(255,0,0,0.4)] border-2 border-black"
+            disabled={!result}
+          >
+            Download pdf
           </button>
         </div>
       </div>
     </div>
-    
+  </div>
   );
 }
