@@ -221,7 +221,7 @@ export default function Service() {
   
         <h1 className="block md:hidden text-3xl font-black tracking-[0.15em] text-cyan-400 leading-tight uppercase">
           TRINETRA<br/>
-          <span className="tracking-[0.1em] text-xl">OSINT</span>
+          <span className="tracking-[0.1em] text-3xl md:text-5xl">OSINT</span>
         </h1>
   
         <div className="ml-7 bg-gradient-to-r from-red-500 to-red-800 border-2 border-cyan-400 px-4 py-1 rounded-lg shadow-[0_0_15px_rgba(0,255,255,0.4)] flex flex-col items-center min-w-[90px]">
