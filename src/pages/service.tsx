@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate,Link } from "react-router-dom";
-import "../pages/css/scan.css";
+import { useNavigate, Link } from "react-router-dom";
 import mobileScan from "../assets/mobile scan.png";
 import addharScan from "../assets/addhar scan.png";
 import panInfo from "../assets/PANinfo.png";
@@ -24,79 +23,18 @@ function Service() {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
+  // Increased credit costs for all services
   const services: ServiceCard[] = [
-    {
-      id: "mobile-intelligence",
-      title: "Mobile intelligence",
-      inputLabel: "Input : Phone No.",
-      image: mobileScan,
-      scanCost: 50,
-      link:"/telegramscan",
-    },
-    {
-      id: "aadhaar-to-info",
-      title: "Addhar to info",
-      inputLabel: "Input : Addhar No.",
-      image: addharScan,
-      scanCost: 10,
-      link:"/AddharInfo"
-    },
-    {
-      id: "pan-to-info",
-      title: "PAN to info",
-      inputLabel: "Input : PAN No.",
-      image: panInfo,
-      link:"/panVerification"
-    },
-    {
-      id: "mobile-to-pan",
-      title: "Mobile to PAN",
-      inputLabel: "Input : Mobile No.",
-      image: panInfo,
-      link:"/MobileToPan"
-    },
-    {
-      id: "pan-to-gst",
-      title: "PAN to GST Info",
-      inputLabel: "Input : PAN No.",
-      image: panToGST,
-      link:"/PantoGst"
-    },
-    {
-      id: "director-intelligence",
-      title: "Director Intelligence",
-      inputLabel: "Input : DIN No.",
-      image: directorSearch,
-      link:"/DirectorIntelegence"
-    },
-    {
-      id: "pan-to-uan",
-      title: "PAN to UAN Info",
-      inputLabel: "Input : PAN No.",
-      image: panToUpi,
-      link:"/PanToUan"
-    },
-    {
-      id: "experian-credit",
-      title: "Experian Credit PDF",
-      inputLabel: "Input : Report Info",
-      image: panInfo,
-      link:"/ExperianCredit"
-    },
-    {
-      id: "vehicle-to-owner",
-      title: "Vehicle to Owner",
-      inputLabel: "Input : Vehicle No.",
-      image: panInfo,
-      link:"/VehicleOwner"
-    },
-    {
-      id: "premium-breach",
-      title: "Premium Breach Lookup",
-      inputLabel: "Input : Mobile No.",
-      image: panInfo,
-      link:"/Premiumlookup"
-    },
+    { id: "mobile-intelligence", title: "Mobile intelligence", inputLabel: "Input : Phone No.", image: mobileScan, scanCost: 100, link: "/telegramscan" },
+    { id: "aadhaar-to-info", title: "Addhar to info", inputLabel: "Input : Addhar No.", image: addharScan, scanCost: 50, link: "/AddharInfo" },
+    { id: "pan-to-info", title: "PAN to info", inputLabel: "Input : PAN No.", image: panInfo, scanCost: 40, link: "/panVerification" },
+    { id: "mobile-to-pan", title: "Mobile to PAN", inputLabel: "Input : Mobile No.", image: panInfo, scanCost: 40, link: "/MobileToPan" },
+    { id: "pan-to-gst", title: "PAN to GST Info", inputLabel: "Input : PAN No.", image: panToGST, scanCost: 30, link: "/PantoGst" },
+    { id: "director-intelligence", title: "Director Intelligence", inputLabel: "Input : DIN No.", image: directorSearch, scanCost: 60, link: "/DirectorIntelegence" },
+    { id: "pan-to-uan", title: "PAN to UAN Info", inputLabel: "Input : PAN No.", image: panToUpi, scanCost: 30, link: "/PanToUan" },
+    { id: "experian-credit", title: "Experian Credit PDF", inputLabel: "Input : Report Info", image: panInfo, scanCost: 200, link: "/ExperianCredit" },
+    { id: "vehicle-to-owner", title: "Vehicle to Owner", inputLabel: "Input : Vehicle No.", image: panInfo, scanCost: 20, link: "/VehicleOwner" },
+    { id: "premium-breach", title: "Premium Breach Lookup", inputLabel: "Input : Mobile No.", image: panInfo, scanCost: 80, link: "/Premiumlookup" },
   ];
 
   useEffect(() => {
@@ -105,16 +43,13 @@ function Service() {
 
       if (!token) {
         setError("No token found");
-        setTimeout(() => {
-          navigate("/login");
-        }, 4000);
+        setTimeout(() => navigate("/login"), 4000);
         return;
       }
 
       const getCredits = async () => {
         try {
           const username = localStorage.getItem("username");
-    
           const response = await fetch(
             "https://police-project-backend-68ng.vercel.app/api/getCredits",
             {
@@ -123,9 +58,8 @@ function Service() {
               body: JSON.stringify({ username }),
             }
           );
-    
           const data = await response.json();
-          setCredits(data.credit);
+          setCredits(data.credit || 0);
         } catch (err) {
           console.error("Error fetching credits");
         }
@@ -136,37 +70,22 @@ function Service() {
           "https://police-project-backend-68ng.vercel.app/api/verify",
           {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ token }),
           }
         );
 
         const data = await response.json();
-        console.log(data);
-        getCredits();
-
+        
         if (!data.success) {
-          if (!token) {
-            setError("token not verified login again");
-            setTimeout(() => {
-              navigate("/login");
-            }, 4000);
-          } else {
-            setError("Token expired");
-            setTimeout(() => {
-              navigate("/login");
-            }, 4000);
-          }
+          setError(data.message || "Session Expired");
+          setTimeout(() => navigate("/login"), 4000);
           return;
         }
 
         setUser(data.user);
-        // Fetch user credits if available in the response
-        if (data.user?.credits !== undefined) {
-          setCredits(data.user.credits);
-        }
+        getCredits();
+        
       } catch (err) {
         setError("Server error");
       }
@@ -175,95 +94,80 @@ function Service() {
     verifyUser();
   }, [navigate]);
 
- 
-
   const filteredServices = services.filter((service) =>
     service.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  if (error) {
-    return (
-      <div className="h-screen flex justify-center items-center text-red-500 bg-black">
-        {error}
-      </div>
-    );
-  }
-
-  if (!user) {
-    return (
-      <div className="h-screen flex justify-center items-center text-white bg-black">
-        Verifying...
-      </div>
-    );
-  }
+  if (error) return <div className="h-screen flex justify-center items-center text-red-500 bg-black font-bold uppercase tracking-tighter">{error}</div>;
+  if (!user) return <div className="h-screen flex justify-center items-center text-white bg-black font-black text-2xl animate-pulse">VERIFYING...</div>;
 
   return (
-    <div className="service-page">
-      {/* Header Section */}
-      <div className="service-header">
-        <h1 className="logo">TRINETRA OSINT</h1>
-        <div style={{ display: "flex", alignItems: "center", gap: "20px", flex: 1, justifyContent: "flex-end", flexWrap: "wrap" }}>
-          <div style={{ position: "relative", flex: "0 0 300px", maxWidth: "100%" }}>
-            <input
-              type="text"
-              placeholder="Search here"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              style={{
-                width: "100%",
-                padding: "12px 40px 12px 45px",
-                borderRadius: "8px",
-                border: "none",
-                background: "#d3d3d3",
-                color: "#000",
-                fontSize: "16px",
-                outline: "none",
-              }}
-            />
-            <span
-              style={{
-                position: "absolute",
-                left: "15px",
-                top: "50%",
-                transform: "translateY(-50%)",
-                fontSize: "20px",
-              }}
-            >
-              🔍
-            </span>
-          </div>
-          <div className="credits-box">
-            <span className="credits-text">Credts</span>
-            <span className="credits-count">{credits}</span>
+    <div className="min-h-screen w-full bg-[#0a1919] text-white p-4 md:p-8 font-sans">
+      
+      <div className="max-w-[1400px] mx-auto flex flex-col gap-6">
+        
+        {/* ROW 1: Heavy Bold Heading & Live Credits */}
+        <div className="flex justify-between items-center w-full">
+          <h1 className="text-4xl md:text-8xl font-black tracking-[-0.04em] text-cyan-400 uppercase leading-none italic">
+            TRINETRA<br className="md:hidden" /> <span className="md:inline hidden"> </span>OSINT
+          </h1>
+
+          <div className="bg-gradient-to-r from-red-600 to-red-800 border-2 border-cyan-400 px-4 py-2 md:px-8 md:py-3 rounded-xl shadow-[0_0_25px_rgba(0,255,255,0.4)] flex flex-col items-center min-w-[100px] md:min-w-[140px]">
+            <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-white opacity-90 leading-tight">Credits</span>
+            <span className="text-2xl md:text-4xl font-black text-white drop-shadow-lg">{credits}</span>
           </div>
         </div>
-      </div>
 
-      {/* Services Grid */}
-      <div className="service-grid">
-        {filteredServices.map((service) => (
-          <div key={service.id} className="service-card">
-            {service.scanCost && (
-              <div className="scan-cost">
-                Scan Cost: {service.scanCost} credits
+        {/* ROW 2: Search Box */}
+        <div className="relative w-full">
+          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-xl text-gray-500">🔍</span>
+          <input
+            type="text"
+            placeholder="Search Intelligence Database..."
+            className="w-full p-4 pl-12 rounded-2xl bg-gray-200 text-black text-lg font-bold outline-none focus:ring-4 focus:ring-cyan-500/50 transition-all placeholder:text-gray-500"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+        </div>
+
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-6">
+          {filteredServices.map((service) => (
+            <div key={service.id} className="relative group flex flex-col bg-[#114d4d] border-2 border-cyan-400/40 rounded-3xl overflow-hidden hover:border-cyan-400 transition-all shadow-2xl transform hover:-translate-y-2">
+              
+            {/* SCAN COST BAR */}
+<div className="w-full bg-cyan-950/80 border-b border-cyan-400/20 py-2 text-center">
+  {/* Changed mobile text-[10px] to text-base */}
+  <span className="text-cyan-300 text-base md:text-base font-black uppercase tracking-[0.1em]">
+    Execution Cost: {service.scanCost} Credits
+  </span>
+</div>
+
+              <div className="h-44 overflow-hidden bg-black/40 flex justify-center items-center p-4">
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  className="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-500"
+                />
               </div>
-            )}
-            <img
-              src={service.image}
-              alt={service.title}
-              className="service-card-image"
-            />
-            <h3 className="service-card-title">{service.title}</h3>
-            <div className="service-card-input-label">{service.inputLabel}</div>
-            <Link to={service.link}>
-            <button
-             
-              className="service-card-button"
-            >
-              Scan Now
-            </button></Link>
-          </div>
-        ))}
+
+              <div className="p-6 flex flex-col gap-3 flex-1">
+                <h3 className="text-xl font-black text-white uppercase tracking-tight leading-tight">{service.title}</h3>
+                
+                <div className="bg-black/30 p-3 rounded-xl border border-cyan-900/50 mb-2">
+                  <p className="text-[9px] text-cyan-500 font-bold uppercase mb-1">Requirement</p>
+                  <p className="text-sm text-gray-300 font-medium italic">{service.inputLabel}</p>
+                </div>
+
+                <Link to={service.link} className="mt-auto">
+                  <button className="w-full bg-cyan-600 hover:bg-cyan-400 hover:text-black text-white py-3 rounded-xl font-black text-sm uppercase transition-all shadow-lg active:scale-95">
+                    Execute Scan
+                  </button>
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -215,20 +215,23 @@ export default function Service() {
       
       {/* HEADER */}
       <header className="flex justify-between items-center w-full mb-4 flex-shrink-0">
-        <h1 className="hidden md:block text-5xl font-black tracking-[0.5em] text-cyan-400 uppercase  border-cyan-500 pb-2">
-          TRINETRA OSINT
-        </h1>
+  {/* Desktop Heading: Massive, Thick, and Negative Spacing for "Thick" look */}
+  <h1 className="hidden md:block text-5xl font-black tracking-[-0.04em] text-cyan-400 uppercase italic">
+    TRINETRA OSINT
+  </h1>
+
+  {/* Mobile Heading: Bold and Large with specific OSINT sizing */}
+  <h1 className="block md:hidden text-3xl font-black tracking-[-0.04em] text-cyan-400 leading-none uppercase italic">
+    TRINETRA<br/>
+    <span className="tracking-normal text-3xl">OSINT</span>
+  </h1>
+
   
-        <h1 className="block md:hidden text-3xl font-black tracking-[0.15em] text-cyan-400 leading-tight uppercase">
-          TRINETRA<br/>
-          <span className="tracking-[0.1em] text-3xl md:text-5xl">OSINT</span>
-        </h1>
-  
-        <div className="ml-7 bg-gradient-to-r from-red-500 to-red-800 border-2 border-cyan-400 px-4 py-1 rounded-lg shadow-[0_0_15px_rgba(0,255,255,0.4)] flex flex-col items-center min-w-[90px]">
+        <div className="ml-7 bg-gradient-to-r from-red-500 to-red-800 border-2 border-cyan-400 px-4 py-1 rounded-lg shadow-[0_0_15px_rgba(0,255,255,0.4)] flex flex-col items-center min-w-[20px]">
           <span className="text-xs font-black text-white uppercase tracking-[0.2em]">Credits</span>
           <span className="text-lg font-black text-white">{credits}</span>
         </div>
-      </header>
+        </header>
   
       {/* MAIN SCAN CARD: Added margin (m-2) to ensure green border doesn't touch screen edges */}
 
