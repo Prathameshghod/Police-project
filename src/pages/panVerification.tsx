@@ -196,53 +196,51 @@ export default function Service() {
   };
 
   return (
-    <div className="service-page relative min-h-screen w-full bg-[#0a1919] flex flex-col items-center overflow-hidden font-sans">
+    <div className="service-page relative h-screen w-full bg-[#0a1919] flex flex-col items-center overflow-hidden font-sans">
     {/* Background Canvas */}
     <canvas ref={canvasRef} className="absolute inset-0 z-0 pointer-events-none w-full h-full" />
   
-    {/* MAIN CONTAINER */}
-    <div className="relative z-10 flex flex-col w-full max-w-[1200px] h-screen p-4 md:p-10">
+    {/* MAIN CONTAINER: h-full and overflow-hidden prevent the page from scrolling */}
+    <div className="relative z-10 flex flex-col w-full max-w-[1200px] h-full p-4 md:p-10 overflow-hidden">
       
-      {/* HEADER: Dynamic based on screen size */}
-      <header className="flex justify-between items-center w-full mb-6">
-        {/* Desktop Heading: One line, wide spacing, only shows on md+ screens */}
-        <h1 className="hidden md:block text-5xl font-black tracking-[0.5em] text-cyan-400 uppercase border-b-4 border-cyan-500 pb-2">
+      {/* HEADER */}
+      <header className="flex justify-between items-center w-full mb-4 flex-shrink-0">
+        <h1 className="hidden md:block text-5xl font-black tracking-[0.5em] text-cyan-400 uppercase  border-cyan-500 pb-2">
           TRINETRA OSINT
         </h1>
   
-        {/* Mobile Heading: Two lines, only shows on small screens */}
         <h1 className="block md:hidden text-3xl font-black tracking-[0.15em] text-cyan-400 leading-tight uppercase">
           TRINETRA<br/>
-          <span className="tracking-[0.2em] text-3xl">OSINT</span>
+          <span className="tracking-[0.1em] text-xl">OSINT</span>
         </h1>
   
-        {/* Credits Box: Matches Desktop-5 style on big screens */}
-        <div className="ml-7 bg-gradient-to-r from-red-500 to-red-800 border-2 border-cyan-400 px-6 py-2 rounded-lg md:rounded-1xl shadow-[0_0_15px_rgba(0,255,255,0.4)] flex flex-col items-center min-w-[100px]">
-          <span className="text-sm md:text-base font-bold text-white uppercase">Credits</span>
-          <span className="text-xl md:text-2xl font-black text-white">{credits}</span>
+        <div className="ml-7 bg-gradient-to-r from-red-500 to-red-800 border-2 border-cyan-400 px-4 py-1 rounded-lg shadow-[0_0_15px_rgba(0,255,255,0.4)] flex flex-col items-center min-w-[90px]">
+          <span className="text-xs font-black text-white uppercase tracking-[0.2em]">Credits</span>
+          <span className="text-lg font-black text-white">{credits}</span>
         </div>
       </header>
   
-      {/* MAIN SCAN CARD: Center-aligned on desktop, full-width on mobile */}
-      <div className="flex-1 flex flex-col bg-gradient-to-b from-[#114d4d] to-[#0a1919] border-[3px] border-cyan-400 rounded-[40px] overflow-hidden shadow-[0_0_30px_rgba(0,255,255,0.2)] mx-auto w-full max-w-5xl">
-        
-        {/* INPUT SECTION: Responsive Padding */}
-        <div className="p-6 md:p-12 flex flex-col md:flex-row md:items-end gap-6">
-          <div className="flex-1 flex flex-col gap-3">
-            <label className="text-white text-lg md:text-2xl font-bold uppercase tracking-widest">
-              Phone Number
+      {/* MAIN SCAN CARD: Added margin (m-2) to ensure green border doesn't touch screen edges */}
+
+      <div className="flex-1 flex flex-col bg-gradient-to-b from-[#114d4d] to-[#0a1919] border-[4px] border-cyan-400 rounded-[30px] md:rounded-[30px] overflow-hidden shadow-[0_0_30px_rgba(0,255,255,0.2)] w-full max-w-[99vw] md:max-w-[100%] mx-auto m-1 mb-1">    
+        {/* INPUT SECTION: Label and Input in same line */}
+        <div className="p-4 md:p-8 flex flex-col gap-4">
+          <div className="flex flex-row items-center gap-3">
+            <label className="text-white text-sm md:text-xl font-bold uppercase whitespace-nowrap">
+              Phone:
             </label>
             <input
               type="text"
-              placeholder="Enter Phone Number to scan"
-              className="w-full h-12 md:h-14 px-4 rounded-xl bg-gray-300 text-black text-lg outline-none border-none shadow-inner"
+              placeholder="Number..."
+              className="flex-1 h-10 md:h-12 px-4 rounded-xl bg-gray-300 text-black text-sm md:text-lg outline-none border-none shadow-inner"
               value={number}
               onChange={(e) => setNumber(e.target.value)}
             />
           </div>
   
+          {/* Scan Button Bellow */}
           <button 
-            className="h-12 md:h-14 px-10 bg-[#222] text-white border-2 border-gray-600 rounded-full md:rounded-2xl font-black text-lg md:text-xl uppercase hover:bg-black transition-all shadow-lg active:scale-95"
+            className="w-full h-10 md:h-12 bg-[#222] text-white border-2 border-gray-600 rounded-xl font-black text-sm md:text-lg uppercase hover:bg-black transition-all active:scale-95"
             onClick={scanNumber} 
             disabled={loading}
           >
@@ -250,35 +248,35 @@ export default function Service() {
           </button>
         </div>
   
-        {/* RESULT SECTION: Maximized Area */}
-        <div className="flex-1 flex flex-col px-6 md:px-12 pb-6 min-h-0">
-          <h2 className="text-white text-xl md:text-2xl font-bold uppercase mb-4">
+        {/* RESULT SECTION: flex-1 makes this take up all remaining space */}
+        <div className="flex-1 flex flex-col px-4 md:px-10 pb-2 min-h-0">
+          <h2 className="text-white text-sm md:text-xl font-bold uppercase mb-1">
             Result :
           </h2>
           
-          {/* Result Box: Massive space for OSINT data */}
-          <div className="flex-1 w-full bg-gray-300 rounded-[30px] p-6 overflow-y-auto text-black font-mono text-sm md:text-base border-4 border-cyan-400/50 shadow-2xl">
+          {/* Result Box: Wider and Longer via flex-1 */}
+          <div className="flex-1 w-full bg-gray-300 rounded-[20px] p-4 overflow-y-auto text-black font-mono text-xs md:text-sm border-2 border-cyan-400/30 shadow-2xl">
             {result ? (
               Object.entries(result).map(([key, value]) => (
-                <div key={key} className="mb-3 border-b border-black/10 pb-2">
-                  <span className="font-bold text-teal-900 uppercase text-xs">{key}</span>
-                  <div className="pl-2 break-words leading-relaxed">
+                <div key={key} className="mb-2 border-b border-black/10 pb-1">
+                  <span className="font-bold text-teal-900 uppercase text-[10px]">{key}</span>
+                  <div className="pl-1 break-words">
                     {typeof value === "object" ? JSON.stringify(value, null, 2) : String(value)}
                   </div>
                 </div>
               ))
             ) : (
-              <div className="h-full flex items-center justify-center text-gray-500 italic uppercase tracking-[0.5em] text-center">
-                Awaiting System Input...
+              <div className="h-full flex items-center justify-center text-gray-500 italic uppercase tracking-[0.3em] text-center text-[10px]">
+                Ready for Input
               </div>
             )}
           </div>
         </div>
   
-        {/* FOOTER BUTTON: Download PDF aligned right for Desktop-5 style */}
-        <div className="p-6 md:p-8 flex justify-end">
+        {/* FOOTER BUTTON: Made smaller and compact */}
+        <div className="p-4 flex justify-end flex-shrink-0">
           <button 
-            className="w-full md:w-auto md:px-12 bg-red-600 hover:bg-red-500 text-black py-3 rounded-full font-black text-lg uppercase shadow-[0_0_20px_rgba(255,0,0,0.4)] border-2 border-black"
+            className="px-8 py-2 bg-red-600 hover:bg-red-500 text-black rounded-full font-black text-xs md:text-sm uppercase shadow-lg border border-black"
             disabled={!result}
           >
             Download pdf
