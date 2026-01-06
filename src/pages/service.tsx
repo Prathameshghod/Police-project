@@ -26,15 +26,15 @@ function Service() {
 
   // Increased credit costs for all services
   const services: ServiceCard[] = [
-    { id: "mobile-intelligence", title: "Mobile intelligence", inputLabel: "Input : Phone No.", image: mobileScan, scanCost: 100, link: "/telegramscan" },
-    { id: "aadhaar-to-info", title: "Addhar to info", inputLabel: "Input : Addhar No.", image: addharScan, scanCost: 50, link: "/AddharLookup" },
-    { id: "pan-to-info", title: "PAN to info", inputLabel: "Input : PAN No.", image: panInfo, scanCost: 40, link: "/panVerification" },
+    { id: "mobile-intelligence", title: "Mobile intelligence", inputLabel: "Input : Phone No.", image: mobileScan, scanCost: 200, link: "/telegramscan" },
+    { id: "aadhaar-to-info", title: "Addhar to info", inputLabel: "Input : Addhar No.", image: addharScan, scanCost: 10, link: "/AddharLookup" },
+    { id: "pan-to-info", title: "PAN to info", inputLabel: "Input : PAN No.", image: panInfo, scanCost: 10, link: "/panVerification" },
     { id: "mobile-to-pan", title: "Mobile to PAN", inputLabel: "Input : Mobile No.", image: panInfo, scanCost: 40, link: "/MobileToPan" },
-    { id: "pan-to-gst", title: "PAN to GST Info", inputLabel: "Input : PAN No.", image: panToGST, scanCost: 30, link: "/PantoGst" },
-    { id: "director-intelligence", title: "Director Intelligence", inputLabel: "Input : DIN No.", image: directorSearch, scanCost: 60, link: "/DirectorIntelegence" },
-    { id: "pan-to-uan", title: "PAN to UAN Info", inputLabel: "Input : PAN No.", image: panToUpi, scanCost: 30, link: "/PanToUan" },
-    { id: "experian-credit", title: "Experian Credit PDF", inputLabel: "Input : Report Info", image: panInfo, scanCost: 200, link: "/ExperianCredit" },
-    { id: "vehicle-to-owner", title: "Vehicle to Owner", inputLabel: "Input : Vehicle No.", image: panInfo, scanCost: 20, link: "/VehicleOwner" },
+    { id: "pan-to-gst", title: "PAN to GST Info", inputLabel: "Input : PAN No.", image: panToGST, scanCost: 20, link: "/PantoGst" },
+    { id: "director-intelligence", title: "Director Intelligence", inputLabel: "Input : DIN No.", image: directorSearch, scanCost: 26, link: "/DirectorIntelegence" },
+    { id: "pan-to-uan", title: "PAN to UAN Info", inputLabel: "Input : PAN No.", image: panToUpi, scanCost: 20, link: "/PanToUan" },
+    { id: "experian-credit", title: "Experian Credit PDF", inputLabel: "Input : Report Info", image: panInfo, scanCost: 80, link: "/ExperianCredit" },
+    { id: "vehicle-to-owner", title: "Vehicle to Owner", inputLabel: "Input : Vehicle No.", image: panInfo, scanCost: 40, link: "/VehicleOwner" },
     { id: "premium-breach", title: "Premium Breach Lookup", inputLabel: "Input : Mobile No.", image: panInfo, scanCost: 80, link: "/Premiumlookup" },
   ];
 

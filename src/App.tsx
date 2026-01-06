@@ -10,6 +10,7 @@ import PanToUan from "./pages/PanToUan"
 import DirectorIntelegence from "./pages/DirectorIntelegence";
 import ExperianCredit from "./pages/ExperianCredit";
 import VehicleOwner from "./pages/VehicleOwner";
+import Premiumlookup from "./pages/Premiumlookup";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 function App() {
@@ -61,6 +62,10 @@ function App() {
     {
       path: "/VehicleOwner",
       element: <VehicleOwner/>,
+    },
+     {
+      path: "/Premiumlookup",
+      element: <Premiumlookup/>,
     },
   ]);
 
