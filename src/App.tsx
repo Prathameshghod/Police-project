@@ -9,6 +9,7 @@ import MobileToPan from "./pages/MobileToPan";
 import PanToUan from "./pages/PanToUan"
 import DirectorIntelegence from "./pages/DirectorIntelegence";
 import ExperianCredit from "./pages/ExperianCredit";
+import VehicleOwner from "./pages/VehicleOwner";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 function App() {
@@ -56,6 +57,10 @@ function App() {
     {
       path: "/ExperianCredit",
       element: <ExperianCredit/>,
+    },
+    {
+      path: "/VehicleOwner",
+      element: <VehicleOwner/>,
     },
   ]);
 
