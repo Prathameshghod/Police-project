@@ -5,6 +5,7 @@ import addharScan from "../assets/addhar scan.png";
 import panInfo from "../assets/PANinfo.png";
 import panToGST from "../assets/PanToGST.png";
 import panToUpi from "../assets/PanToUpi.png";
+
 import directorSearch from "../assets/DirectorSearch.png";
 
 interface ServiceCard {

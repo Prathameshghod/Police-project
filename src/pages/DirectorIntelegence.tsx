@@ -1,16 +1,16 @@
-import { useEffect, useState , useRef} from "react";
+import  { useEffect, useState  ,useRef} from "react";
 import { useNavigate } from "react-router-dom";
-
+import "./css/scan.css";
 
 export default function Service() {
+ 
   const [number, setNumber] = useState("");
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [credits, setCredits] = useState(0);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  const navigate = useNavigate();
-
+  
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -106,36 +106,70 @@ export default function Service() {
       cancelAnimationFrame(animationFrameId);
     };
   }, []);
-  /* ===== GET CREDITS ===== */
-  const getCredits = async () => {
-    try {
-      const username = localStorage.getItem("username");
+ 
+ const getCredits = async () => { 
+  try{
+    const username = localStorage.getItem("username");
+    const response = await fetch(
+      "https://police-project-backend-68ng.vercel.app/api/getCredits",
+      {
+        method:"POST",
+        headers : { "Content-Type": "application/json" },
+        body : JSON.stringify({username})
+      }
+    );
+    const result = await response.json();
+    const credits=  result.credit;
+    console.log(credits);
+      // ✅ SAVE TO STATE
+    setCredits(result.credit);
 
-      const response = await fetch(
-        "https://police-project-backend-68ng.vercel.app/api/getCredits",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username }),
-        }
-      );
+
+
+  }
+  catch(err){
+    alert("server error in fetching credits");
+  }
+}
+
+  const scanNumber = async () => {
+    if (!number) return alert("Enter a number first!");
+    setLoading(true);
+
+    try {
+
+      const username = localStorage.getItem("username");
+      const response = await fetch("https://police-project-backend-68ng.vercel.app/api/MobileApiCall", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({  number,username })
+      });
 
       const data = await response.json();
-      setCredits(data.credit);
+      console.log(data);
+      setResult(data);
     } catch (err) {
-      console.error("Error fetching credits");
+      console.error(err);
+      alert("Server Error");
+    } finally {
+      setLoading(false);
+     
     }
   };
+ getCredits();
+  const navigate = useNavigate();
 
-  /* ===== VERIFY USER ===== */
+
   useEffect(() => {
     const verifyUser = async () => {
       const token = localStorage.getItem("token");
 
       if (!token) {
-        alert("Session expired. Please login again.");
+        alert("No token found");
+      
+      setTimeout(() => {
         navigate("/login");
-        return;
+      }, 4000); // 2 seconds delay
       }
 
       try {
@@ -143,57 +177,33 @@ export default function Service() {
           "https://police-project-backend-68ng.vercel.app/api/verify",
           {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ token }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+           body: JSON.stringify({ token })
           }
         );
 
         const data = await response.json();
 
         if (!data.success) {
-          alert("Invalid session. Please login again.");
-          navigate("/login");
-          return;
+         if (!token) {
+      alert("No token found");
+      
+      setTimeout(() => {
+        navigate("/login");
+      }, 4000); // 2 seconds delay
+    }
         }
 
-        getCredits(); // only after verification
+       
       } catch (err) {
-        alert("Server error. Please login again.");
-        navigate("/login");
+        alert("Server error");
       }
     };
 
     verifyUser();
   }, []);
-
-  /* ===== SCAN NUMBER ===== */
-  const scanNumber = async () => {
-    if (!number) {
-      alert("Enter a number first");
-      return;
-    }
-
-    setLoading(true);
-    const username = localStorage.getItem("username");
-
-    try {
-      const response = await fetch(
-        "https://police-project-backend-68ng.vercel.app/api/AddharLookup",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ number ,username }),
-        }
-      );
-
-      const data = await response.json();
-      setResult(data);
-    } catch (err) {
-      alert("Server error during scan");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div className="service-page relative h-screen w-full bg-[#0a1919] flex flex-col items-center overflow-hidden font-sans">
@@ -203,25 +213,25 @@ export default function Service() {
     {/* MAIN CONTAINER: h-full and overflow-hidden prevent the page from scrolling */}
     <div className="relative z-10 flex flex-col w-full max-w-[1200px] h-full p-4 md:p-10 overflow-hidden">
       
-            {/* HEADER */}
-            <header className="flex justify-between items-center w-full mb-4 flex-shrink-0">
+      {/* HEADER */}
+      <header className="flex justify-between items-center w-full mb-4 flex-shrink-0">
   {/* Desktop Heading: Massive, Thick, and Negative Spacing for "Thick" look */}
-  <h1 className="hidden md:block text-5xl font-black tracking-[0.03em] text-cyan-400 uppercase italic">
+  <h1 className="hidden md:block text-5xl font-black tracking-[-0.04em] text-cyan-400 uppercase italic">
     TRINETRA OSINT
   </h1>
 
   {/* Mobile Heading: Bold and Large with specific OSINT sizing */}
-  <h1 className="block md:hidden text-3xl font-black tracking-[0.03em] text-cyan-400 leading-none uppercase italic">
+  <h1 className="block md:hidden text-3xl font-black tracking-[-0.04em] text-cyan-400 leading-none uppercase italic">
     TRINETRA<br/>
     <span className="tracking-normal text-3xl">OSINT</span>
   </h1>
+
   
-  
-        <div className="ml-7 bg-gradient-to-r from-red-500 to-red-800 border-2 border-cyan-400 px-4 py-1 rounded-lg shadow-[0_0_15px_rgba(0,255,255,0.4)] flex flex-col items-center min-w-[90px]">
+        <div className="ml-7 bg-gradient-to-r from-red-500 to-red-800 border-2 border-cyan-400 px-4 py-1 rounded-lg shadow-[0_0_15px_rgba(0,255,255,0.4)] flex flex-col items-center min-w-[20px]">
           <span className="text-xs font-black text-white uppercase tracking-[0.2em]">Credits</span>
           <span className="text-lg font-black text-white">{credits}</span>
         </div>
-      </header>
+        </header>
   
       {/* MAIN SCAN CARD: Added margin (m-2) to ensure green border doesn't touch screen edges */}
 
@@ -230,7 +240,7 @@ export default function Service() {
         <div className="p-4 md:p-8 flex flex-col gap-4">
           <div className="flex flex-row items-center gap-3">
             <label className="text-white text-sm md:text-xl font-bold uppercase whitespace-nowrap">
-              Addhar:
+             Vehichle Number:
             </label>
             <input
               type="text"
