@@ -5,7 +5,10 @@ import Telegramscan from "./pages/telegramscan";
 import PanVerification from "./pages/panVerification";
 import AddharLookup from "./pages/Addharlookup";
 import PanToGst from "./pages/PantoGst";
+import MobileToPan from "./pages/MobileToPan";
+import PanToUan from "./pages/PanToUan"
 import DirectorIntelegence from "./pages/DirectorIntelegence";
+import ExperianCredit from "./pages/ExperianCredit";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 function App() {
@@ -39,8 +42,20 @@ function App() {
       element: <PanToGst/>,
     },
     {
+      path: "/PanToUan",
+      element: <PanToUan/>,
+    },
+    {
       path: "/DirectorIntelegence",
       element: <DirectorIntelegence/>,
+    },
+    {
+      path: "/MobileToPan",
+      element: <MobileToPan/>,
+    },
+    {
+      path: "/ExperianCredit",
+      element: <ExperianCredit/>,
     },
   ]);
 

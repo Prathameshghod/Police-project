@@ -178,7 +178,7 @@ export default function Service() {
 
     try {
       const response = await fetch(
-        "https://police-project-backend-68ng.vercel.app/api/PanToGst",
+        "https://police-project-backend-68ng.vercel.app/api/MobileToPan",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -203,9 +203,10 @@ export default function Service() {
     {/* MAIN CONTAINER: h-full and overflow-hidden prevent the page from scrolling */}
     <div className="relative z-10 flex flex-col w-full max-w-[1200px] h-full p-4 md:p-10 overflow-hidden">
       
-      {/* HEADER */}
-      <header className="flex justify-between items-center w-full mb-4 flex-shrink-0">
-      <h1 className="hidden md:block text-5xl font-black tracking-[0.03em] text-cyan-400 uppercase italic">
+        {/* HEADER */}
+        <header className="flex justify-between items-center w-full mb-4 flex-shrink-0">
+  {/* Desktop Heading: Massive, Thick, and Negative Spacing for "Thick" look */}
+  <h1 className="hidden md:block text-5xl font-black tracking-[0.03em] text-cyan-400 uppercase italic">
     TRINETRA OSINT
   </h1>
 
@@ -214,6 +215,7 @@ export default function Service() {
     TRINETRA<br/>
     <span className="tracking-normal text-3xl">OSINT</span>
   </h1>
+  
   
         <div className="ml-7 bg-gradient-to-r from-red-500 to-red-800 border-2 border-cyan-400 px-4 py-1 rounded-lg shadow-[0_0_15px_rgba(0,255,255,0.4)] flex flex-col items-center min-w-[90px]">
           <span className="text-xs font-black text-white uppercase tracking-[0.2em]">Credits</span>
@@ -238,6 +240,7 @@ export default function Service() {
               onChange={(e) => setNumber(e.target.value)}
             />
           </div>
+        
   
           {/* Scan Button Bellow */}
           <button 
