@@ -26,7 +26,7 @@ function Service() {
   // Increased credit costs for all services
   const services: ServiceCard[] = [
     { id: "mobile-intelligence", title: "Mobile intelligence", inputLabel: "Input : Phone No.", image: mobileScan, scanCost: 100, link: "/telegramscan" },
-    { id: "aadhaar-to-info", title: "Addhar to info", inputLabel: "Input : Addhar No.", image: addharScan, scanCost: 50, link: "/AddharInfo" },
+    { id: "aadhaar-to-info", title: "Addhar to info", inputLabel: "Input : Addhar No.", image: addharScan, scanCost: 50, link: "/AddharLookup" },
     { id: "pan-to-info", title: "PAN to info", inputLabel: "Input : PAN No.", image: panInfo, scanCost: 40, link: "/panVerification" },
     { id: "mobile-to-pan", title: "Mobile to PAN", inputLabel: "Input : Mobile No.", image: panInfo, scanCost: 40, link: "/MobileToPan" },
     { id: "pan-to-gst", title: "PAN to GST Info", inputLabel: "Input : PAN No.", image: panToGST, scanCost: 30, link: "/PantoGst" },

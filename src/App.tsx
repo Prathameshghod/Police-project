@@ -3,6 +3,7 @@ import Login from "./pages/login";
 import Service from "./pages/service";
 import Telegramscan from "./pages/telegramscan";
 import PanVerification from "./pages/panVerification";
+import AddharLookup from "./pages/Addharlookup";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 function App() {
@@ -26,6 +27,10 @@ function App() {
      {
       path: "/panVerification",
       element: <PanVerification/>,
+    },
+    {
+      path: "/AddharLookup",
+      element: <AddharLookup/>,
     },
   ]);
 
