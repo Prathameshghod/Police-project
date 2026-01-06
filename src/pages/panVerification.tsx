@@ -237,6 +237,7 @@ export default function Service() {
               onChange={(e) => setNumber(e.target.value)}
             />
           </div>
+        
   
           {/* Scan Button Bellow */}
           <button 
