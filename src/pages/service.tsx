@@ -113,9 +113,19 @@ function Service() {
             TRINETRA<br className="md:hidden" /> <span className="md:inline hidden"> </span>OSINT
           </h1>
 
-          <div className="bg-gradient-to-r from-red-600 to-red-800 border-2 border-cyan-400 px-4 py-2 md:px-8 md:py-3 rounded-xl shadow-[0_0_25px_rgba(0,255,255,0.4)] flex flex-col items-center min-w-[100px] md:min-w-[140px]">
-            <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-white opacity-90 leading-tight">Credits</span>
-            <span className="text-2xl md:text-4xl font-black text-white drop-shadow-lg">{credits}</span>
+          <div className="flex items-center gap-3 md:gap-4">
+            {/* Buy Credits Button */}
+            <Link to="/creditpayment">
+              <button className="bg-gradient-to-r from-teal-500 via-cyan-500 to-blue-500 hover:from-teal-400 hover:via-cyan-400 hover:to-blue-400 text-white font-['Goldman'] font-bold text-xs md:text-sm px-3 md:px-5 py-2 md:py-3 rounded-lg shadow-[0_0_15px_rgba(0,255,255,0.4)] hover:shadow-[0_0_20px_rgba(0,255,255,0.6)] transition-all duration-300 hover:scale-105 uppercase tracking-wide">
+                Buy Credits
+              </button>
+            </Link>
+
+            {/* Credits Display */}
+            <div className="bg-gradient-to-r from-red-600 to-red-800 border-2 border-cyan-400 px-4 py-2 md:px-8 md:py-3 rounded-xl shadow-[0_0_25px_rgba(0,255,255,0.4)] flex flex-col items-center min-w-[100px] md:min-w-[140px]">
+              <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-white opacity-90 leading-tight">Credits</span>
+              <span className="text-2xl md:text-4xl font-black text-white drop-shadow-lg">{credits}</span>
+            </div>
           </div>
         </div>
 
@@ -127,7 +137,7 @@ function Service() {
             placeholder="Search Intelligence Database..."
             className="w-full p-4 pl-12 rounded-2xl bg-gray-200 text-black text-lg font-bold outline-none focus:ring-4 focus:ring-cyan-500/50 transition-all placeholder:text-gray-500"
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
           />
         </div>
 
