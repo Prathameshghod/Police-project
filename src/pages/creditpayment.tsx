@@ -42,9 +42,47 @@ export default function CreditPayment() {
     { credits: 100, price: 5000 },
   ];
 
-  const handlePayNow = (credits: number, price: number) => {
-    // Handle payment logic here
-    console.log(`Payment for ${credits} credits - Rs ${price}`);
+  // Razorpay script loader
+  const loadRazorpayScript = () => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
+  const handlePayNow = async (credits: number, price: number) => {
+    const res = await loadRazorpayScript();
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+
+    const options = {
+      key: "rzp_test_S1LwuNW8Q42Q7U", // Test Key ID
+      amount: price * 100, // Amount in paise
+      currency: "INR",
+      name: "Trinetra OSINT",
+      description: `${credits} Credits Purchase`,
+      image: "https://razorpay.com/favicon.png",
+      handler: function (response: any) {
+        alert("Payment successful! Payment ID: " + response.razorpay_payment_id);
+        // You can call your backend here to verify payment and update credits
+      },
+      prefill: {
+        name: localStorage.getItem("username") || "",
+        email: "",
+        contact: "",
+      },
+      theme: {
+        color: "#06b6d4",
+      },
+    };
+    // @ts-ignore
+    const rzp = new window.Razorpay(options);
+    rzp.open();
   };
 
   if (error) {
@@ -67,10 +105,7 @@ export default function CreditPayment() {
         Current Credits: {currentCredits}
       </div>
 
-      {/* Buy Credits Button */}
-      <button className="w-full max-w-[600px] py-4 px-8 text-xl sm:text-2xl font-['Goldman'] font-bold text-white rounded-lg bg-gradient-to-r from-teal-500 via-cyan-500 to-blue-500 hover:shadow-[0_0_20px_rgba(0,255,255,0.5)] hover:scale-[1.02] transition-all duration-300 mb-12">
-        Buy Credits
-      </button>
+      
 
       {/* Plans Section */}
       <div className="w-full max-w-[1400px]">
